@@ -146,7 +146,7 @@
                     // raise the event so the redirect URL can be manipulated
                     RedirectingForSuccess.RaiseEvent(new ObjectEventArgs<PaymentRedirectingUrl>(redirecting), this);
 
-                    return Redirect(redirecting.RedirectingToUrl);
+                    return Redirect(redirecting.RedirectingToUrl.Replace("%INVOICE%", invoice.Key.ToString().EncryptWithMachineKey()));
                 }
 
                 var retrying = new PaymentRedirectingUrl("Cancel") { RedirectingToUrl = _cancelUrl };
